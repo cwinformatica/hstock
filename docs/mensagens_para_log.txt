@@ -1,0 +1,25 @@
+Mensagens de Log
+----------------
+	Produtos Finais
+	---------------
+	Criação:	"Adicionou produto final $nome";
+	Exclusão:	"Removeu produto final $id";
+	Edição:		"Atualizou produto final $id";
+	
+	Itens
+	-----
+	Criação:	"Adicionou item $nome";
+	Exclusão:	"Removeu item $id";
+	Edição:		"Atualizou item $id";
+	
+	Ordens de Produção
+	------------------
+	Criação:	"Adicionou uma nova ordem de produção";
+	Exclusão:	"Removeu ordem de produção $id";
+	Edição:		"Atualizou ordem de produção $id";
+	
+	Usuários
+	--------
+	Criação:	"Adicionou usuário $nome";
+	Exclusão:	"Removeu usuário $id";
+	Edição:		"Atualizou usuário $id";
