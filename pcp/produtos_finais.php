@@ -78,7 +78,7 @@
 				$produto_final = $r->fetch_object();
 				?>
                 <h2>Editando produto final <?php echo $produto_final->id; ?></h2>
-                <form action='produtos_finais.php?action=update&codigo=<?php echo $produto_final->id; ?>' method="post">
+                <form action='produtos_finais.php?action=update&id=<?php echo $produto_final->id; ?>' method="post">
 				<table class="content_table">
                 	<tr>
                     	<th>Nome</th>
