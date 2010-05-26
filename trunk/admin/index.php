@@ -8,7 +8,7 @@
     
     <body>
         <div id="header">
-	        <h1>HSTOCK - Módulo Administrador</h1>
+	        <h1>HSTOCK::Módulo Administrador</h1>
         </div>
         <div id='login'>
             <form action="login.php" method="post">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>HSTOCK::Módulo Administrador</title>
+        <title>HSTOCK - Módulo Administrador</title>
         <link href="estilos_hton.css" rel="stylesheet" type="text/css" />
     </head>
     
