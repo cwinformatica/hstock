@@ -168,43 +168,6 @@
 					header('Location: usuarios.php');
 				break;
 				
-								
-				case 'permissoes':
-					$c = new conexao;
-					$c->set_charset('utf8');
-					/*
-						a: usuarios;
-						b: permissoes;
-						c: modulos.
-					*/
-					$q1 = "SELECT * FROM usuarios;";
-					$r1 = $c->query($q1);
-					$q2 = "SELECT nome FROM modulos;";
-					$r2 = $c->query($q2);
-					$q3 = "SELECT ";
-					while($usuario = $r1->fetch_object()): ?>
-                    	<form action='usuarios.php?action=setapermissoes&usuario_id=<?php echo $usuario->id; ?>' method="post">
-                    	<table class="content_table">
-                        	<tr>
-                            	<th rowspan="<?php echo $r2->num_rows+1; ?>"><?php echo $usuario->username; ?></th>
-								<?php
-                                while($modulo = $r2->fetch_object()): ?>
-                                	<tr>
-										<td><?php echo $modulo->nome; ?></td>
-                                        <td>
-                                        	<?php
-												if(
-											?>
-                                        </td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            </tr>
-                        </table>
-                        </form>
-                    <?php endwhile; ?>
-					<?php
-				break;
-				
 				
 				default:
 					?>
