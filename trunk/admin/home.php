@@ -8,44 +8,21 @@
     
     <body>
 		<?php
-            require_once('../classes/functions.php');
-            session_start();
-            if(isAuthenticated() == false)
-            {
-                echo "<p class='error_message'>Por favor, efetue o login.</p>";
-                exit;
-            }
-            else if(isAdmin() == false)
-            {
-                echo "<p class='error_message'>Você não é administrador.</p>";
-                exit;
-            }
+		require_once('classes/functions.php');
+		session_start();
+		if(isAuthenticated() == false)
+		{
+			echo "<p class='error_message'>Por favor, efetue o login.</p>";
+			exit;
+		}
         ?>
         <div id="header">
-            <h1>HSTOCK</h1>
+            <h1>HSTOCK - Módulo Administrador</h1>
         </div>
         
         <div id="menu">
-            <ul>
-                <li>Usuários
-                  <ul>
-                    <li><a href="usuarios.php">Cadastro de Usuários</a></li>
-                    <li><a href="usuarios.php?action=add">Adicionar Novo Usuário</a></li>
-                  </ul>
-              </li>
-                <li>Logs
-                  <ul>
-                    <li><a href="logs.php">Visualizar Logs</a></li>
-                    <li><a href="logs.php?action=pesquisar">Pesquisar</a></li>
-                  </ul>
-              </li>
-                <li>Outras Ações
-                    <ul>
-                        <li><a href="logout.php">Efetuar Logout </a></li>
-                    </ul>
-                </li>
-            </ul>
-    </div>
+            <?php require_once('menu.php'); ?>
+		</div>
             
         <div id="content">
             <p>Seja bem-vindo(a), <?php echo $_SESSION['nome']; ?>!</p>

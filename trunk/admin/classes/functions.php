@@ -1,7 +1,7 @@
 ﻿<?php
 	function isAuthenticated()
 	{
-		if(empty($_SESSION['id']) or empty($_SESSION['username']) or empty($_SESSION['password']) or empty($_SESSION['nome']) or empty($_SESSION['admin']))
+		if(empty($_SESSION['id']) or empty($_SESSION['username']) or empty($_SESSION['password']) or empty($_SESSION['nome']))
 			return false;
 		else
 			return true;

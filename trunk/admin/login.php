@@ -27,7 +27,7 @@
             </table>            
             </form>
             <?php
-			require_once('../classes/conexao.class.php');
+			require_once('classes/conexao.class.php');
 			$username = trim($_POST['username']);
 			$password = trim($_POST['password']);
 			if(empty($username) or empty($password))
