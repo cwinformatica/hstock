@@ -149,13 +149,56 @@
 						?>
 						<tr>
                         	<th rowspan="<?php echo $r2->num_rows; ?>">Módulos acessíveis pelo usuário</th>
-						<?php
-						while($modulo = $r2->fetch_object()): ?>
-                        	<td><?php echo $modulo->nome; ?></td>
+							<?php
+                            while($modulo = $r2->fetch_object()): ?>
+                                <td><?php echo $modulo->nome; ?></td>
                         </tr>
 						<?php endwhile; ?>
+                    </table><br />
+                    <form action='usuarios.php?action=permissoes&id=<?php echo $id; ?>' method="post">
+					<table class="content_table">
+                    	<tr>
+                        	<th colspan="2">Permissões</th>
+						</tr>
+                        <?php
+						$q = "SELECT * FROM modulos;";
+						$r = $c->query($q);
+						while($modulo = $r->fetch_object()): ?>
+                        	<tr>
+	                        	<td><?php echo $modulo->nome; ?></td>
+                                <td>
+                               	<?php 
+									$q = "SELECT a.id, a.nome FROM modulos AS a INNER JOIN permissoes AS b ON a.id = b.modulo_id INNER JOIN usuarios AS c ON b.usuario_id = c.id WHERE c.id = '$id' AND a.nome = '" . $modulo->nome . "';";
+									$r1 = $c->query($q);
+									if($r1->num_rows == 0): ?>
+										<input type='checkbox' name='permissoes[<?php echo $modulo->id; ?>]' />
+									<?php else: ?>
+										<input type='checkbox' name='permissoes[<?php echo $modulo->id; ?>]' checked />
+									<?php endif; ?>
+                                </td>
+                            </tr>
+						<?php endwhile; ?>
+                        <tr>
+                        	<td class="bottom_row" colspan="2"><input type='submit' value="Atualizar permissões" /></td>
+                        </tr>
                     </table>
+                    </form>
 					<?php
+				break;
+				
+				
+				case 'permissoes':
+					$id = $_GET['id'];
+					$c = new conexao;
+					$c->set_charset('utf8');
+					$q = "DELETE FROM permissoes WHERE usuario_id = '$id';";
+					$c->query($q);
+					foreach($_POST['permissoes'] as $chv => $vlr)
+					{
+						$q = "INSERT INTO permissoes(usuario_id, modulo_id) VALUES('$id', '$chv');";	
+						$c->query($q);
+					}
+					header('Location: usuarios.php');
 				break;
 				
 				
