@@ -18,6 +18,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Banco de Dados: `hton`
 --
+CREATE DATABASE hton;
+USE hton;
 
 -- --------------------------------------------------------
 

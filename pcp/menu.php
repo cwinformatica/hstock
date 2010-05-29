@@ -11,7 +11,7 @@
     </li>
     <li><a href="ops.php">Ordens de produção (OPs) </a>
 	    <ul>
-    		<li><a href="ops.php?action=add">Criar nova OP</a></li>
+    		<li><a href="ops.php?action=add">Nova OP</a></li>
 	    </ul>
     </li>
     <li>Misc.

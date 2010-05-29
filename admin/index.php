@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    	<title>HSTOCK - Módulo Administrador</title>
+    	<title>HSTOCK - Módulo Administração</title>
 	    <link href="estilos_hton.css" rel="stylesheet" type="text/css" />
     </head>
     
     <body>
         <div id="header">
-	        <h1>HSTOCK::Módulo Administrador</h1>
+	        <h1>HSTOCK::Módulo Administração</h1>
         </div>
         <div id='login'>
             <form action="login.php" method="post">
