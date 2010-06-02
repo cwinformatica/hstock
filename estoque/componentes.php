@@ -265,6 +265,83 @@
 			break;
 			
 			
+			case 'pesquisar':
+				?>
+                <form action='componentes.php?action=mostraresultados&pesquisa=codigo' method="post">
+				<table class="content_table">
+                	<tr>
+                    	<th colspan="2" class="bottom_row">Pesquisa por código</th>
+                    </tr>
+                	<tr>
+                    	<th>Digite o código do produto</th>
+                        <td><input type='text' name='codigo' /></td>
+                    </tr>
+                    <tr>
+                    	<td colspan='2' class="bottom_row"><input type='submit' value='Pesquisar' /></td>
+                    </tr>
+                </table>
+                </form>
+                <br />
+                <form action='componentes.php?action=mostraresultados&pesquisa=descricao' method="post">
+				<table class="content_table">
+	                <tr>
+                    	<th colspan="2" class="bottom_row">Pesquisa por descrição</th>
+                    </tr>
+                	<tr>
+                    	<th>Digite parte da descrição do produto</th>
+                        <td><input type='text' name='descricao' /></td>
+                    </tr>
+                    <tr>
+                    	<td colspan='2' class="bottom_row"><input type='submit' value='Pesquisar' /></td>
+                    </tr>
+                </table>
+                </form>
+				
+				<?php
+			break;
+			
+			
+			case 'mostraresultados':
+				$_POST = array_trim($_POST);
+				$c = new conexao;
+				$c->set_charset('utf8');
+				if($_GET['pesquisa'] == 'codigo')
+				{
+					$codigo = $_POST['codigo'];
+					$q = "SELECT * FROM componentes WHERE codigo = '$codigo';";
+				}
+				else
+				{
+					$descricao = $_POST['descricao'];
+					$q = "SELECT * FROM componentes WHERE descricao LIKE '$descricao';";	
+				}
+				$r = $c->query($q);
+				?>
+				<h2>Resultados da pesquisa</h2>
+                <table class="content_table">
+                	<tr>
+                    	<th>Código</th>
+                        <th>Descrição</th>
+                        <th>Unidade</th>
+                        <th>Saldo</th>
+                        <th>Editar</th>
+                        <th>Apagar</th>
+                    </tr>
+                    <?php while($componente = $r->fetch_object()): ?>
+                    	<tr>
+                            <td><a href='componentes.php?action=view&codigo=<?php echo $componente->codigo; ?>'><?php echo $componente->codigo; ?></a></td>
+                            <td><?php echo $componente->descricao; ?></td>
+                            <td><?php echo $componente->unidade; ?></td>
+                            <td><?php echo $componente->saldo; ?></td>
+                            <td><a href='componentes.php?action=edit&codigo=<?php echo $componente->codigo; ?>'>Editar</a></td>
+                            <td><a href='componentes.php?action=delete&codigo=<?php echo $componente->codigo; ?>'>Apagar</a></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </table>
+				<?php
+			break;
+			
+			
 			case 'view':
 				$codigo = $_GET['codigo'];
 				$c = new conexao;
