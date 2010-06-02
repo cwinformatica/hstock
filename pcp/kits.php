@@ -16,6 +16,11 @@
 		echo "<p class='error_message'>Por favor, efetue o login.</p>";
 		exit;
 	}
+	elseif(hasPermission($_SESSION['id'], 'PCP') == false)
+	{
+		echo "<p class='error_message'>Você não possui privilégios para acessar esta área.</p>";
+		exit;
+	}
 	?>
    	<div id="header">
     	<h1>HSTOCK::Módulo PCP</h1>
@@ -71,15 +76,16 @@
 						$_POST = array_trim($_POST);
 						$produto_final_id = $_POST['produto_final_id'];
 						$qtd_componentes = $_POST['qtd_componentes'];
+						
+						$c = new conexao;
+						$c->set_charset('utf8');
+						$q = "SELECT codigo FROM componentes;";
+						$r = $c->query($q);
 						for($i = 0; $i < $qtd_componentes; $i++): ?>
 							<tr>
                             	<td>
                                 	<select name='<?php echo $i; ?>[componente_codigo]'>
                                     	<?php
-										$c = new conexao;
-										$c->set_charset('utf8');
-										$q = "SELECT * FROM componentes;";
-										$r = $c->query($q);
 										while($componente = $r->fetch_object()): ?>
                                         	<option value='<?php echo $componente->codigo; ?>'><?php echo $componente->codigo; ?></option>
 										<?php endwhile; ?>
@@ -87,7 +93,10 @@
                                 </td>
                                 <td><input type='text' name='<?php echo $i; ?>[quantidade]' /></td>
                             </tr>
-						<?php endfor; ?>
+						<?php 
+						$r->data_seek(0);
+						endfor;
+						?>
                         <tr>
                         	<td colspan='2' class="bottom_row"><input type='submit' value='Criar kit' /></td>
                         </tr>

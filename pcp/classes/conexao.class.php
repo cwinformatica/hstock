@@ -1,5 +1,5 @@
 ﻿<?php
-	class Conexao extends mysqli
+	class conexao extends mysqli
 	{
 		private $host = 'localhost';
 		private $user = 'root';

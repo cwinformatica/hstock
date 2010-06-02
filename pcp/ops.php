@@ -16,6 +16,11 @@
 		echo "<p class='error_message'>Por favor, efetue o login.</p>";
 		exit;
 	}
+	elseif(hasPermission($_SESSION['id'], 'PCP') == false)
+	{
+		echo "<p class='error_message'>Você não possui privilégios para acessar esta área.</p>";
+		exit;
+	}
 	?>
    	<div id="header">
     	<h1>HSTOCK::Módulo PCP</h1>
@@ -113,26 +118,36 @@
                     <tr>
                     	<th>Status</th>
                         <td>
-                        	<?php if($op->status == 'Em aberto'): ?>
-                                <input type='radio' name='status' value='Em aberto' checked/>Em aberto
-                                <input type='radio' name='status' value='Aguardando por componentes' />Aguardando por componentes
+                        	<?php if($op->status == 'Ativa'): ?>
+                                <input type='radio' name='status' value='Ativa' checked/>Ativa
+                                <input type='radio' name='status' value='Aguardando compra' />Aguardando compra
                                 <input type='radio' name='status' value='Em produção' />Em produção
-                                <input type='radio' name='status' value='Concluída' />Concluída
-                            <?php elseif($op->status == 'Aguardando por componentes'): ?>
-	                            <input type='radio' name='status' value='Em aberto' />Em aberto
-                                <input type='radio' name='status' value='Aguardando por componentes' checked />Aguardando por componentes
+                                <input type='radio' name='status' value='Finalizada' />Finalizada
+                                <input type='radio' name='status' value='Cancelada' />Cancelada
+                            <?php elseif($op->status == 'Aguardando compra'): ?>
+                            	<input type='radio' name='status' value='Ativa' />Ativa
+                                <input type='radio' name='status' value='Aguardando compra' checked />Aguardando compra
                                 <input type='radio' name='status' value='Em produção' />Em produção
-                                <input type='radio' name='status' value='Concluída' />Concluída
+                                <input type='radio' name='status' value='Finalizada' />Finalizada
+                                <input type='radio' name='status' value='Cancelada' />Cancelada
                             <?php elseif($op->status == 'Em produção'): ?>
-    	                        <input type='radio' name='status' value='Em aberto' />Em aberto
-                                <input type='radio' name='status' value='Aguardando por componentes' />Aguardando por componentes
+                            	<input type='radio' name='status' value='Ativa' />Ativa
+                                <input type='radio' name='status' value='Aguardando compra' />Aguardando compra
                                 <input type='radio' name='status' value='Em produção' checked />Em produção
-                                <input type='radio' name='status' value='Concluída' />Concluída
-                            <?php else: ?>
-        	                    <input type='radio' name='status' value='Em aberto' />Em aberto
-                                <input type='radio' name='status' value='Aguardando por componentes' />Aguardando por componentes
+                                <input type='radio' name='status' value='Finalizada' />Finalizada
+                                <input type='radio' name='status' value='Cancelada' />Cancelada
+                            <?php elseif($op->status == 'Finalizada'): ?>
+                            	<input type='radio' name='status' value='Ativa' />Ativa
+                                <input type='radio' name='status' value='Aguardando compra' />Aguardando compra
                                 <input type='radio' name='status' value='Em produção' />Em produção
-                                <input type='radio' name='status' value='Concluída' checked />Concluída
+                                <input type='radio' name='status' value='Finalizada' checked />Finalizada
+                                <input type='radio' name='status' value='Cancelada' />Cancelada
+                            <?php else: ?>
+                            	<input type='radio' name='status' value='Ativa' />Ativa
+                                <input type='radio' name='status' value='Aguardando compra' />Aguardando compra
+                                <input type='radio' name='status' value='Em produção' />Em produção
+                                <input type='radio' name='status' value='Finalizada' />Finalizada
+                                <input type='radio' name='status' value='Cancelada' checked />Cancelada
                             <?php endif; ?>
                         </td>
                     </tr>

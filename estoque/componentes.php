@@ -16,6 +16,11 @@
 		echo "<p class='error_message'>Por favor, efetue o login.</p>";
 		exit;
 	}
+	elseif(hasPermission($_SESSION['id'], 'Estoque') == false)
+	{
+		echo "<p class='error_message'>Você não possui privilégios para acessar esta área.</p>";
+		exit;
+	}
 	?>
    	<div id="header">
     	<h1>HSTOCK::Módulo Estoque</h1>
@@ -49,9 +54,13 @@
                     	<th>Unidade</th>
                         <td>
                             <input type='radio' name='unidade' value='PÇ' checked="checked" />Peça
+                            <input type='radio' name='unidade' value='CX' />Caixa
                             <input type='radio' name='unidade' value='KG' />Quilo
                             <input type='radio' name='unidade' value='LT' />Litro
                             <input type='radio' name='unidade' value='MT' />Metro
+                            <input type='radio' name='unidade' value='PAR' />Par
+                            <input type='radio' name='unidade' value='UN' />Unidade
+                            <input type='radio' name='unidade' value='SV' />Serviço
                         </td>
                     </tr>
                     <tr>
@@ -106,22 +115,30 @@
                         	<?php
 								switch($componente->unidade)
 								{
-									case 'PÇ':
+									case 'CX':
 										?>
-										<input type='radio' name='unidade' value='PÇ' checked="checked" />Peça
+                                        <input type='radio' name='unidade' value='PÇ' />Peça
+                                        <input type='radio' name='unidade' value='CX' checked="checked" />Caixa
                                         <input type='radio' name='unidade' value='KG' />Quilo
                                         <input type='radio' name='unidade' value='LT' />Litro
                                         <input type='radio' name='unidade' value='MT' />Metro
+                                        <input type='radio' name='unidade' value='PAR' />Par
+                                        <input type='radio' name='unidade' value='UN' />Unidade
+                                        <input type='radio' name='unidade' value='SV' />Serviço
 										<?php
 									break;
 									
 									
 									case 'KG':
 										?>
-										<input type='radio' name='unidade' value='PÇ' />Peça
+										<input type='radio' name='unidade' value='PÇ'  />Peça
+                                        <input type='radio' name='unidade' value='CX' />Caixa
                                         <input type='radio' name='unidade' value='KG' checked="checked" />Quilo
                                         <input type='radio' name='unidade' value='LT' />Litro
                                         <input type='radio' name='unidade' value='MT' />Metro
+                                        <input type='radio' name='unidade' value='PAR' />Par
+                                        <input type='radio' name='unidade' value='UN' />Unidade
+                                        <input type='radio' name='unidade' value='SV' />Serviço
 										<?php
 									break;
 									
@@ -129,9 +146,13 @@
 									case 'LT':
 										?>
 										<input type='radio' name='unidade' value='PÇ' />Peça
+                                        <input type='radio' name='unidade' value='CX' />Caixa
                                         <input type='radio' name='unidade' value='KG' />Quilo
                                         <input type='radio' name='unidade' value='LT' checked="checked" />Litro
                                         <input type='radio' name='unidade' value='MT' />Metro
+                                        <input type='radio' name='unidade' value='PAR' />Par
+                                        <input type='radio' name='unidade' value='UN' />Unidade
+                                        <input type='radio' name='unidade' value='SV' />Serviço
 										<?php
 									break;
 									
@@ -139,9 +160,69 @@
 									case 'MT';
 										?>
 										<input type='radio' name='unidade' value='PÇ' />Peça
+                                        <input type='radio' name='unidade' value='CX' />Caixa
                                         <input type='radio' name='unidade' value='KG' />Quilo
                                         <input type='radio' name='unidade' value='LT' />Litro
-                                        <input type='radio' name='unidade' value='MT' checked="checked"/>Metro
+                                        <input type='radio' name='unidade' value='MT'  checked="checked" />Metro
+                                        <input type='radio' name='unidade' value='PAR' />Par
+                                        <input type='radio' name='unidade' value='UN' />Unidade
+                                        <input type='radio' name='unidade' value='SV' />Serviço
+										<?php
+									break;
+									
+									
+									case 'PAR':
+										?>
+                                        <input type='radio' name='unidade' value='PÇ' />Peça
+                                        <input type='radio' name='unidade' value='CX' />Caixa
+                                        <input type='radio' name='unidade' value='KG' />Quilo
+                                        <input type='radio' name='unidade' value='LT' />Litro
+                                        <input type='radio' name='unidade' value='MT' />Metro
+                                        <input type='radio' name='unidade' value='PAR' checked="checked" />Par
+                                        <input type='radio' name='unidade' value='UN' />Unidade
+                                        <input type='radio' name='unidade' value='SV' />Serviço
+										<?php
+									break;
+									
+									
+									case 'PÇ':
+										?>
+                                        <input type='radio' name='unidade' value='PÇ' checked="checked" />Peça
+                                        <input type='radio' name='unidade' value='CX' />Caixa
+                                        <input type='radio' name='unidade' value='KG' />Quilo
+                                        <input type='radio' name='unidade' value='LT' />Litro
+                                        <input type='radio' name='unidade' value='MT' />Metro
+                                        <input type='radio' name='unidade' value='PAR' />Par
+                                        <input type='radio' name='unidade' value='UN' />Unidade
+                                        <input type='radio' name='unidade' value='SV' />Serviço
+										<?php
+									break;
+									
+									
+									case 'UN':
+										?>
+                                        <input type='radio' name='unidade' value='PÇ' />Peça
+                                        <input type='radio' name='unidade' value='CX' />Caixa
+                                        <input type='radio' name='unidade' value='KG' />Quilo
+                                        <input type='radio' name='unidade' value='LT' />Litro
+                                        <input type='radio' name='unidade' value='MT' />Metro
+                                        <input type='radio' name='unidade' value='PAR' />Par
+                                        <input type='radio' name='unidade' value='UN' checked="checked" />Unidade
+                                        <input type='radio' name='unidade' value='SV' />Serviço
+										<?php
+									break;
+									
+									
+									case 'SV':
+										?>
+                                        <input type='radio' name='unidade' value='PÇ' />Peça
+                                        <input type='radio' name='unidade' value='CX' />Caixa
+                                        <input type='radio' name='unidade' value='KG' />Quilo
+                                        <input type='radio' name='unidade' value='LT' />Litro
+                                        <input type='radio' name='unidade' value='MT' />Metro
+                                        <input type='radio' name='unidade' value='PAR' />Par
+                                        <input type='radio' name='unidade' value='UN' />Unidade
+                                        <input type='radio' name='unidade' value='SV' checked="checked" />Serviço
 										<?php
 									break;
 								}
@@ -216,8 +297,39 @@
 			
 			
 			case 'quantidade':
+				if($_SERVER['REQUEST_METHOD'] == "POST")
+					@$p = trim($_POST['p']);
+				else
+					@$p = $_GET['p'];
+				$c = new conexao;
+				$c->set_charset('utf8');
+				$q = "SELECT count(codigo) AS QtdLinhas FROM componentes;";
+				$r1 = $c->query($q);
+				$qtdlinhas = $r1->fetch_object();
+				$q = "SELECT * FROM componentes LIMIT $p,100;";
+				$r = $c->query($q);
 				?>
                 <h2>Alteração de quantidades em estoque</h2>
+                <div class='paginador'>
+                <?php if($p < 100): ?>
+                <form action='componentes.php?action=quantidade' method='post'>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                    <a href='componentes.php?action=quantidade&p=<?php echo $p + 100; ?>'>Próxima</a>
+                </form>
+                <?php elseif(($p + 100) >= $qtdlinhas->QtdLinhas): ?>
+                <form action='componentes.php?action=quantidade' method='post'>
+	                <a href='componentes.php?action=quantidade&p=<?php echo $p - 100; ?>'>Anterior</a>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                </form>
+                <?php else: ?>
+                <form action='componentes.php?action=quantidade' method='post'>
+	                <a href='componentes.php?action=quantidade&p=<?php echo $p - 100; ?>'>Anterior</a>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                    <a href='componentes.php?action=quantidade&p=<?php echo $p + 100; ?>'>Próxima</a>
+                </form>
+                <?php endif; ?>
+                </div>
+                <br />
 				<table class="content_table">
                 	<tr>
                     	<th>Código</th>
@@ -227,10 +339,6 @@
                         <th>Novo saldo</th>
                     </tr>
                     <?php
-					$c = new conexao;
-					$c->set_charset('utf8');
-					$q = "SELECT * FROM componentes;";
-					$r = $c->query($q);
 					while($componente = $r->fetch_object()): ?>
                     <tr>
                     	<td><?php echo $componente->codigo; ?></td>
@@ -246,7 +354,27 @@
                     </tr>
                     <?php endwhile; ?>
                 </table>
-				<?php
+                <br />
+                <div class='paginador'>
+                <?php if($p < 100): ?>
+                <form action='componentes.php?action=quantidade' method='post'>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                    <a href='componentes.php?action=quantidade&p=<?php echo $p + 100; ?>'>Próxima</a>
+                </form>
+                <?php elseif(($p + 100) >= $qtdlinhas->QtdLinhas): ?>
+                <form action='componentes.php?action=quantidade' method='post'>
+	                <a href='componentes.php?action=quantidade&p=<?php echo $p - 100; ?>'>Anterior</a>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                </form>
+                <?php else: ?>
+                <form action='componentes.php?action=quantidade' method='post'>
+	                <a href='componentes.php?action=quantidade&p=<?php echo $p - 100; ?>'>Anterior</a>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                    <a href='componentes.php?action=quantidade&p=<?php echo $p + 100; ?>'>Próxima</a>
+                </form>
+                <?php endif; ?>
+                </div>
+                <?php
 			break;
 			
 			
@@ -263,8 +391,36 @@
 			
 			
 			default:
+				@$p = (empty($_GET['p'])) ? ($p = 0) : ($p = $_GET['p']);
+				$c = new conexao;
+				$c->set_charset('utf8');
+				$q = "SELECT count(codigo) AS QtdLinhas FROM componentes;";
+				$r1 = $c->query($q);
+				$qtdlinhas = $r1->fetch_object();
+				$q = "SELECT * FROM componentes LIMIT $p,100;";
+				$r = $c->query($q);
 				?>
                 <h2>Lista de componentes</h2>
+                <div class="paginador">
+                <?php if($p < 100): ?>
+                <form action='componentes.php' method='get'>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                    <a href='componentes.php?p=<?php echo $p + 100; ?>'>Próxima</a>
+                </form>
+                <?php elseif(($p + 100) >= $qtdlinhas->QtdLinhas): ?>
+                <form action='componentes.php' method='get'>
+	                <a href='componentes.php?p=<?php echo $p - 100; ?>'>Anterior</a>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                </form>
+                <?php else: ?>
+                <form action='componentes.php' method='get'>
+	                <a href='componentes.php?p=<?php echo $p - 100; ?>'>Anterior</a>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                    <a href='componentes.php?p=<?php echo $p + 100; ?>'>Próxima</a>
+                </form>
+                <?php endif; ?>
+                </div>
+                <br />
 				<table class="content_table">
 					<tr>
 						<th>Código</th>
@@ -275,10 +431,6 @@
                         <th>Apagar</th>
 					</tr>
 					<?php
-					$c = new conexao;
-					$c->set_charset('utf8');
-					$q = "SELECT * FROM componentes;";
-					$r = $c->query($q);
 					while($componente = $r->fetch_object()): ?>
 					<tr>
 						<td><a href='componentes.php?action=view&codigo=<?php echo $componente->codigo; ?>'><?php echo $componente->codigo; ?></a></td>
@@ -290,7 +442,27 @@
 					</tr>
 					<?php endwhile; ?>
 				</table>
-				<?php
+                <br />
+                <div class='paginador'>
+                <?php if($p < 100): ?>
+                <form action='componentes.php' method='get'>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                    <a href='componentes.php?p=<?php echo $p + 100; ?>'>Próxima</a>
+                </form>
+                <?php elseif(($p + 100) >= $qtdlinhas->QtdLinhas): ?>
+                <form action='componentes.php' method='get'>
+	                <a href='componentes.php?p=<?php echo $p - 100; ?>'>Anterior</a>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                </form>
+                <?php else: ?>
+                <form action='componentes.php' method='get'>
+	                <a href='componentes.php?p=<?php echo $p - 100; ?>'>Anterior</a>
+                    <input type='text' name='p' size='4' maxlength="4" value='<?php echo $p; ?>'/>
+                    <a href='componentes.php?p=<?php echo $p + 100; ?>'>Próxima</a>
+                </form>
+                <?php endif; ?>
+                </div>
+                <?php
 			break;
 		}
 		?>
