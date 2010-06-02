@@ -69,6 +69,7 @@
                     <form action='kits.php?action=create&produto_final_id=<?php echo trim($_POST['produto_final_id']); ?>' method="post">
 					<table class="content_table">
                     	<tr>
+                        	<th>Item</th>
                             <th>Componente</th>
                             <th>Quantidade</th>
                         </tr>
@@ -83,6 +84,7 @@
 						$r = $c->query($q);
 						for($i = 0; $i < $qtd_componentes; $i++): ?>
 							<tr>
+                            	<td><?php echo ($i + 1); ?></td>
                             	<td>
                                 	<select name='<?php echo $i; ?>[componente_codigo]'>
                                     	<?php
