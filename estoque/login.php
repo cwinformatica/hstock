@@ -3,7 +3,7 @@
     <head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     	<title>HSTOCK</title>
-	    <link href="estilos_hton.css" rel="stylesheet" type="text/css" />
+	    <link href="../estilos_hton.css" rel="stylesheet" type="text/css" />
     </head>
     
     <body>
@@ -27,7 +27,7 @@
             </table>            
             </form>
             <?php
-			require_once('classes/conexao.class.php');
+			require_once('../includes/conexao.class.php');
 			$username = trim($_POST['username']);
 			$password = trim($_POST['password']);
 			if(empty($username) or empty($password))
