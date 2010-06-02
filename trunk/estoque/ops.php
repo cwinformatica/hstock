@@ -3,13 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>HSTOCK - Módulo Estoque</title>
-        <link href="estilos_hton.css" rel="stylesheet" type="text/css" />
+        <link href="../estilos_hton.css" rel="stylesheet" type="text/css" />
     </head>
     
     <body>
     <?php
-	require_once('classes/conexao.class.php');
-	require_once('classes/functions.php');
+	require_once('../includes/conexao.class.php');
+	require_once('../includes/functions.php');
 	session_start();
 	if(isAuthenticated() == false)
 	{
@@ -21,9 +21,10 @@
 		echo "<p class='error_message'>Você não possui privilégios para acessar esta área.</p>";
 		exit;
 	}
+	logAction($_SESSION['id'], $_SERVER['REQUEST_URI'], var_export($_POST, true), var_export($_GET, true));
 	?>
    	<div id="header">
-    	<h1>HSTOCK::Módulo Estoque</h1>
+    	<h1>HSTOCK - Módulo Estoque</h1>
     </div>
     
     <div id="menu">
