@@ -34,4 +34,12 @@
 			return trim($var);
 		return $var;
 	}
+	
+	function logAction($usuario_id, $url, $post, $get)
+	{
+		$c = new conexao;
+		$c->set_charset('utf8');
+		$q = "INSERT INTO logs(usuario_id, url, get, post, horario) VALUES('$usuario_id', '$url', '$get', '$post', now());";
+		$c->query($q);
+	}
 ?>
