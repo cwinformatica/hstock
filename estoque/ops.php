@@ -92,6 +92,10 @@
 			break;
 			
 			
+			case 'baixa':
+			break;
+			
+			
 			default:
 				?>
                 <h2>Lista de OPS</h2>
@@ -104,6 +108,7 @@
                         <th>Data</th>
                         <th>Editar</th>
                         <th>Apagar</th>
+                        <th>Dar baixa em componentes</th>
                     </tr>
                     <?php
 					$c = new conexao;
@@ -119,6 +124,7 @@
                             <td><?php echo $op->data; ?></td>
                             <td><a href='ops.php?action=edit&id=<?php echo $op->id; ?>'>Editar</a></td>
                             <td><a href='ops.php?action=delete&id=<?php echo $op->id; ?>'>Apagar</a></td>
+                            <td><a href='ops.php?action=baixa&id=<?php echo $op->id; ?>'>Dar baixa</a></td>
                         </tr>
                     <?php endwhile; ?>
                 </table>
