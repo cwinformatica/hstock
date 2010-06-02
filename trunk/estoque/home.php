@@ -15,6 +15,11 @@
 		echo "<p class='error_message'>Por favor, efetue o login.</p>";
 		exit;
 	}
+	elseif(hasPermission($_SESSION['id'], 'Estoque') == false)
+	{
+		echo "<p class='error_message'>Você não possui privilégios para acessar esta área.</p>";
+		exit;
+	}
 	?>
    	<div id="header">
     	<h1>HSTOCK::Módulo Estoque</h1>

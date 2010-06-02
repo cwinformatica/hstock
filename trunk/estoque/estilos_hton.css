@@ -39,6 +39,11 @@
 .bottom_row {
 	text-align: center;
 }
+.paginador {
+	width: 100%;
+	text-align: center;
+}
+
 .evenrow {
 	background-color: #FFF;
 }
