@@ -308,12 +308,12 @@
 				if($_GET['pesquisa'] == 'codigo')
 				{
 					$codigo = $_POST['codigo'];
-					$q = "SELECT * FROM componentes WHERE codigo = '$codigo';";
+					$q = "SELECT * FROM componentes WHERE codigo LIKE '%$codigo%';";
 				}
 				else
 				{
 					$descricao = $_POST['descricao'];
-					$q = "SELECT * FROM componentes WHERE descricao LIKE '$descricao';";	
+					$q = "SELECT * FROM componentes WHERE descricao LIKE '%$descricao%';";	
 				}
 				$r = $c->query($q);
 				?>
@@ -463,7 +463,7 @@
 				$c->set_charset('utf8');
 				$q = "UPDATE componentes SET saldo = '$nsaldo' WHERE codigo = '$codigo';";
 				$c->query($q);
-				header('Location: componentes.php?action=quantidade');
+				header('Location: componentes.php?action=quantidade&p=0');
 			break;
 			
 			
