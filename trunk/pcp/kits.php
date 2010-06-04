@@ -129,6 +129,17 @@
 			break;
 			
 			
+			case 'removercomponente':
+				$componente_codigo = $_GET['componente_codigo'];
+				$produto_final_id = $_GET['produto_final_id'];
+				$c = new conexao;
+				$c->set_charset('utf8');
+				$q = "DELETE FROM kits WHERE produto_final_id = '$produto_final_id' AND componente_codigo = '$componente_codigo';";
+				$c->query($q);
+				header("Location: kits.php?action=view&produto_final_id=$produto_final_id");
+			break;
+			
+			
 			case 'delete':
 				$produto_final_id = $_GET['produto_final_id'];
 				$c = new conexao;
@@ -161,12 +172,13 @@
                 </table><br />
                 <table class="content_table">
                 	<tr>
-                    	<th colspan="3" class="bottom_row">Componentes que fazem parte deste kit</th>
+                    	<th colspan="4" class="bottom_row">Componentes que fazem parte deste kit</th>
                     </tr>
                     <tr>
                     	<th>Componente</th>
                         <th>Descrição</th>
                         <th>Quantidade</th>
+                        <th>Remover</th>
                     </tr>
                     <?php
 					/*
@@ -181,10 +193,48 @@
 						<td><?php echo $componente->codigo; ?></td>
                         <td><?php echo $componente->ComponenteDescricao; ?></td>
                         <td><?php echo $componente->quantidade; ?></td>
+                        <td><a href='kits.php?action=removercomponente&componente_codigo=<?php echo $componente->codigo; ?>&produto_final_id=<?php echo $produto_final_id; ?>'>Remover</a></td>
 					</tr>
 					<?php endwhile; ?>
                 </table>
+                <br />
+                <form action='kits.php?action=adicionarcomponente&produto_final_id=<?php echo $produto_final_id; ?>' method="post">
+				<table class="content_table">
+                	<tr>
+                    	<th colspan="5">Adicionar componente</th>
+                    </tr>
+                    <tr>
+                    	<th>Codigo do componente</th>
+                        <td>
+                        	<select name='componente_codigo'>
+							<?php
+							$q = "SELECT codigo FROM componentes;";
+							$r = $c->query($q);
+							while($componente = $r->fetch_object()): ?>
+                            	<option value='<?php echo $componente->codigo; ?>'><?php echo $componente->codigo; ?></option>
+                            <?php endwhile; ?>
+                            </select>
+                        </td>
+                        <th>Quantidade</th>
+                        <td><input type='text' size='4' maxlength="4" name='quantidade' /></td>
+                        <td><input type='submit' value='Adicionar componente' /></td>
+                    </tr>
+                </table>
+                </form>
 				<?php
+			break;
+			
+			
+			case 'adicionarcomponente':
+				$_POST = array_trim($_POST);
+				$componente_codigo = $_POST['componente_codigo'];
+				$quantidade = $_POST['quantidade'];
+				$produto_final_id = $_GET['produto_final_id'];
+				$c = new conexao;
+				$c->set_charset('utf8');
+				$q = "INSERT INTO kits(componente_codigo, produto_final_id, quantidade) VALUES('$componente_codigo', '$produto_final_id', '$quantidade');";
+				$c->query($q);
+				header("Location: kits.php?action=view&produto_final_id=$produto_final_id");
 			break;
 			
 			
