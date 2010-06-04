@@ -3,13 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>HSTOCK - Módulo PCP</title>
-        <link href="estilos_hton.css" rel="stylesheet" type="text/css" />
+        <link href="../estilos_hton.css" rel="stylesheet" type="text/css" />
     </head>
     
     <body>
     <?php
-	require_once('classes/conexao.class.php');
-	require_once('classes/functions.php');
+	require_once('../includes/conexao.class.php');
+	require_once('../includes/functions.php');
 	session_start();
 	if(isAuthenticated() == false)
 	{
