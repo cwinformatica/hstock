@@ -4,6 +4,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>HSTOCK - Módulo Administrador</title>
         <link href="../estilos_hton.css" rel="stylesheet" type="text/css" />
+        <script type='text/javascript' src="../includes/jquery.js"></script>
+        <script type='text/javascript'>
+        	$("document").ready(
+				function()
+				{
+					$("tr:even").addClass("linhaPar");
+					$("tr:odd").addClass("linhaImpar");
+				}
+			);
+        </script>
     </head>
     
     <body>

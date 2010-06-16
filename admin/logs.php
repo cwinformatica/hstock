@@ -4,6 +4,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>HSTOCK - Módulo Administrador</title>
         <link href="../estilos_hton.css" rel="stylesheet" type="text/css" />
+        <script type='text/javascript' src="../includes/jquery.js"></script>
+        <script type='text/javascript'>
+        	$("document").ready(
+				function()
+				{
+					$("tr:even").addClass("linhaPar");
+					$("tr:odd").addClass("linhaImpar");
+				}
+			);
+        </script>
     </head>
     
     <body>
@@ -61,7 +71,70 @@
     	<?php
 			@$action = $_GET['action'];
 			switch($action)
-			{	
+			{
+				case 'pesquisar':
+					if($_SERVER['REQUEST_METHOD'] == "GET"): ?>
+						<h2>Pesquisar nos logs</h2>
+                        <form action='logs.php?action=pesquisar' method='post'>
+                        <table>
+                        	<tr>
+                            	<th>Digite a data inicial (dd/mm/aaaa):</th>
+                                <td>
+                                	<input type='text' name='dinicial_dia' maxlength="2" size="2" />&nbsp;/
+                                    <input type='text' name='dinicial_mes' maxlength="2" size="2" />&nbsp;/
+                                    <input type='text' name='dinicial_ano' maxlength="4" size="4" />
+								</td>
+                            </tr>
+                            <tr>
+                            	<th>Digite a data final (dd/mm/aaaa):</th>
+                                <td>
+                                	<input type='text' name='dfinal_dia' maxlength="2" size="2" />&nbsp;/
+                                    <input type='text' name='dfinal_mes' maxlength="2" size="2" />&nbsp;/
+                                    <input type='text' name='dfinal_ano' maxlength="4" size="4" />
+								</td>
+                            </tr>
+							<tr>
+                                <td colspan="2" class="bottom_row">
+                                	<input type='submit' value='Pesquisar' />
+                                </td>
+                            </tr>
+                        </table>
+                        </form>
+					<?php else: 
+						$_POST = array_trim($_POST);
+						$data_inicial = implode('-', array($_POST['dinicial_ano'], $_POST['dinicial_mes'], $_POST['dinicial_dia']));
+						$data_final = implode('-', array($_POST['dfinal_ano'], $_POST['dfinal_mes'], $_POST['dfinal_dia']));
+						$c = new conexao;
+						$c->set_charset('utf8');
+						$q = "SELECT a.nome, b.* FROM usuarios AS a INNER JOIN logs AS b ON a.id = b.usuario_id WHERE horario BETWEEN '$data_inicial' AND '$data_final';";
+						$r = $c->query($q);
+						?>
+                    	<h2>Mostrando registros entre (<?php echo $data_inicial; ?>) e (<?php echo $data_final; ?>)</h2>
+                    	<table class="content_table">
+                        	<tr>
+                                <th>ID</th>
+                                <th>Usuário</th>
+                                <th>URL</th>
+                                <th>GET</th>
+                                <th>POST</th>
+                                <th>Horário</th>
+                            </tr>
+                            <?php while($log = $r->fetch_object()): ?>
+							<tr>
+                            	<td><?php echo $log->id; ?></td>
+                                <td><?php echo $log->nome; ?></td>
+                                <td><?php echo $log->url; ?></td>
+                                <td><?php echo $log->get; ?></td>
+                                <td><?php echo $log->post; ?></td>
+                                <td><?php echo brazilianDate($log->horario); ?></td>
+                            </tr>
+                            <?php endwhile; ?>
+                        </table>
+					<?php						
+					endif;
+				break;
+				
+				
 				case 'delete':
 					$id = $_GET['id'];
 					$c = new conexao;
