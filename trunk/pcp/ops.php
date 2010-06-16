@@ -33,7 +33,6 @@
 	if($log->valor == 'ligado')
 		logAction($_SESSION['id'], $_SERVER['REQUEST_URI'], var_export($_POST, true), var_export($_GET, true));
 	?>
-	?>
    	<div id="header">
     	<h1>HSTOCK::Módulo PCP</h1>
     </div>
@@ -203,6 +202,10 @@
                         <td><?php echo $op->OpID; ?></td>
                     </tr>
                     <tr>
+                    	<th>Data</th>
+                        <td><?php echo brazilianDate($op->OpData); ?></td>
+                    </tr>
+                    <tr>
                     	<th>Produto Final</th>
                         <td><?php echo $op->ProdutoFinalNome; ?></td>
                     </tr>
@@ -279,7 +282,7 @@
                             <td><?php echo $op->nome; ?></td>
                             <td><?php echo $op->quantidade; ?></td>
                             <td><?php echo $op->status; ?></td>
-                            <td><?php echo $op->data; ?></td>
+                            <td><?php echo brazilianDate($op->data); ?></td>
                             <td><a href='ops.php?action=edit&id=<?php echo $op->id; ?>'>Editar</a></td>
                             <td><a href='ops.php?action=delete&id=<?php echo $op->id; ?>'>Apagar</a></td>
                         </tr>

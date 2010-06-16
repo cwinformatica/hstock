@@ -44,4 +44,9 @@
 		$q = "INSERT INTO logs(usuario_id, url, get, post, horario) VALUES('$usuario_id', '$url', '" . $get . "', '" . $post . "', now());";
 		$c->query($q);
 	}
+	
+	function brazilianDate($date)
+	{
+		return date('d/m/Y H:i:s', strtotime($date));
+	}
 ?>

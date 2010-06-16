@@ -61,6 +61,10 @@
                         <td><?php echo $op->OpID; ?></td>
                     </tr>
                     <tr>
+                    	<th>Data</th>
+                        <td><?php echo brazilianDate($op->OpData); ?></td>
+                    </tr>
+                    <tr>
                     	<th>Produto Final</th>
                         <td><?php echo $op->ProdutoFinalNome; ?></td>
                     </tr>
@@ -132,7 +136,7 @@
                             <td><?php echo $op->nome; ?></td>
                             <td><?php echo $op->quantidade; ?></td>
                             <td><?php echo $op->status; ?></td>
-                            <td><?php echo $op->data; ?></td>
+                            <td><?php echo brazilianDate($op->data); ?></td>
                             <td><a href='ops.php?action=edit&id=<?php echo $op->id; ?>'>Editar</a></td>
                             <td><a href='ops.php?action=delete&id=<?php echo $op->id; ?>'>Apagar</a></td>
                             <td><a href='ops.php?action=baixa&id=<?php echo $op->id; ?>'>Dar baixa</a></td>
