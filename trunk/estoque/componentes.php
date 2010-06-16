@@ -21,7 +21,18 @@
 		echo "<p class='error_message'>Você não possui privilégios para acessar esta área.</p>";
 		exit;
 	}
-	logAction($_SESSION['id'], $_SERVER['REQUEST_URI'], var_export($_POST, true), var_export($_GET, true));
+	/*
+		Verifica se a configuração de log está ligada ou desligada. Se estiver ligada, ele irá fazer uso da 
+		função logAction.
+	*/
+	$c = new conexao;
+	$c->set_charset('utf8');
+	$q = "SELECT * FROM configuracoes WHERE opcao = 'log';";
+	$r = $c->query($q);
+	$log = $r->fetch_object();
+	if($log->valor == 'ligado')
+		logAction($_SESSION['id'], $_SERVER['REQUEST_URI'], var_export($_POST, true), var_export($_GET, true));
+	?>
 	?>
    	<div id="header">
     	<h1>HSTOCK - Módulo Estoque</h1>

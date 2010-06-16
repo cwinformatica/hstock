@@ -8,8 +8,20 @@
     
     <body>
     <?php
+	/*
+		Importando classes e bibliotecas.
+	*/
 	require_once('../includes/functions.php');
+	require_once('../includes/conexao.class.php');
+	
+	/*
+		Retomando a sessão.
+	*/
 	session_start();
+	
+	/*
+		Testando se o usuário está autenticado e se ele possui permissão para acessar o módulo atual.
+	*/
 	if(isAuthenticated() == false)
 	{
 		echo "<p class='error_message'>Por favor, efetue o login.</p>";
@@ -20,7 +32,18 @@
 		echo "<p class='error_message'>Você não possui privilégios para acessar esta área.</p>";
 		exit;
 	}
-	logAction($_SESSION['id'], $_SERVER['REQUEST_URI'], var_export($_POST, true), var_export($_GET, true));
+	
+	/*
+		Verifica se a configuração de log está ligada ou desligada. Se estiver ligada, ele irá fazer uso da 
+		função logAction.
+	*/
+	$c = new conexao;
+	$c->set_charset('utf8');
+	$q = "SELECT * FROM configuracoes WHERE opcao = 'log';";
+	$r = $c->query($q);
+	$log = $r->fetch_object();
+	if($log->valor == 'ligado')
+		logAction($_SESSION['id'], $_SERVER['REQUEST_URI'], var_export($_POST, true), var_export($_GET, true));
 	?>
    	<div id="header">
     	<h1>HSTOCK - Módulo Administrador</h1>
