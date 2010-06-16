@@ -4,6 +4,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>HSTOCK - Módulo Estoque</title>
         <link href="../estilos_hton.css" rel="stylesheet" type="text/css" />
+        <script type='text/javascript' src="../includes/jquery.js"></script>
+        <script type='text/javascript'>
+        	$("document").ready(
+				function()
+				{
+					$("tr:even").addClass("linhaPar");
+					$("tr:odd").addClass("linhaImpar");
+					$(".baixa").click(function() {
+						if(!confirm("Cuidado! Esta ação não pode ser desfeita! Tem certeza que deseja dar baixa na OP?")) {
+							return false;	
+						}
+					});
+				}
+			);
+        </script>
     </head>
     
     <body>
@@ -56,6 +71,9 @@
 				?>
                 <h2>Visualizando OP <?php echo $id; ?></h2>
 				<table class="content_table">
+                    <tr>
+                    	<th colspan="2">Dados da OP</th>
+                    </tr>
                 	<tr>
                     	<th>ID</th>
                         <td><?php echo $op->OpID; ?></td>
@@ -99,7 +117,11 @@
                             <td><?php echo $componente->ComponenteUnidade; ?></td>
                             <td><?php echo $componente->ComponenteSaldo; ?></td>
                             <td><?php echo $componente->ComponentesNecessarios; ?></td>
-                            <td><?php echo ($componente->ComponentesFaltantes >= 0) ? (0) : ($componente->ComponentesFaltantes); ?></td>
+                            <?php if($componente->ComponentesFaltantes <= 0): ?>
+	                            <td class="componente_faltante"><?php echo $componente->ComponentesFaltantes; ?></td>
+                            <?php else: ?>
+	                            <td><?php echo $componente->ComponentesFaltantes; ?></td>
+                            <?php endif; ?>
                         </tr>
                     <?php endwhile; ?>
                 </table>
@@ -139,7 +161,7 @@
                             <td><?php echo brazilianDate($op->data); ?></td>
                             <td><a href='ops.php?action=edit&id=<?php echo $op->id; ?>'>Editar</a></td>
                             <td><a href='ops.php?action=delete&id=<?php echo $op->id; ?>'>Apagar</a></td>
-                            <td><a href='ops.php?action=baixa&id=<?php echo $op->id; ?>'>Dar baixa</a></td>
+                            <td><a class="baixa" href='ops.php?action=baixa&id=<?php echo $op->id; ?>'>Dar baixa</a></td>
                         </tr>
                     <?php endwhile; ?>
                 </table>
