@@ -110,7 +110,7 @@
                                 <td><?php echo $log->url; ?></td>
                                 <td><?php echo $log->get; ?></td>
                                 <td><?php echo $log->post; ?></td>
-                                <td><?php echo $log->horario; ?></td>
+                                <td><?php echo brazilianDate($log->horario); ?></td>
                                 <td><a href='logs.php?action=delete&id=<?php echo $log->id; ?>'>Apagar</a></td>
                             </tr>
                         <?php endwhile; ?>
