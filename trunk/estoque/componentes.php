@@ -33,7 +33,6 @@
 	if($log->valor == 'ligado')
 		logAction($_SESSION['id'], $_SERVER['REQUEST_URI'], var_export($_POST, true), var_export($_GET, true));
 	?>
-	?>
    	<div id="header">
     	<h1>HSTOCK - Módulo Estoque</h1>
     </div>
