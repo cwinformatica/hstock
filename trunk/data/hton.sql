@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tempo de Geração: Jun 02, 2010 as 08:31 PM
+-- Tempo de Geração: Jun 16, 2010 as 04:58 PM
 -- Versão do Servidor: 5.1.45
 -- Versão do PHP: 5.3.2
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `componentes` (
 --
 
 INSERT INTO `componentes` (`codigo`, `descricao`, `unidade`, `saldo`) VALUES
-('BRCIN0610', 'CI MC68HC705P6ACP RT300 V1.3', 'PÇ', 0.000000),
+('BRCIN0610', 'CI MC68HC705P6ACP RT300 V1.3', 'PÇ', 7958.000000),
 ('FEBCH0011', 'BUCHA SEXT 5/16 X 18 - POSTE', 'PÇ', 0.000000),
 ('FEBCH0012', 'BUCHA SEXT 5/16 X 30 - POSTE', 'PÇ', 0.000000),
 ('FEBCH0013', 'ESPAÇADOR PARA DB25 - BUCHA', 'PÇ', 8.000000),
@@ -4945,6 +4945,27 @@ INSERT INTO `componentes` (`codigo`, `descricao`, `unidade`, `saldo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `configuracoes`
+--
+
+CREATE TABLE IF NOT EXISTS `configuracoes` (
+  `opcao` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `descricao` text COLLATE utf8_unicode_ci NOT NULL,
+  `valor` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo` enum('ONOFF','Valor') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Valor',
+  PRIMARY KEY (`opcao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `configuracoes`
+--
+
+INSERT INTO `configuracoes` (`opcao`, `descricao`, `valor`, `tipo`) VALUES
+('log', 'Habilita/desabilita os logs do sistema. Atenção: Caso habilitado, pode diminuir o desempenho do sistema.', 'ligado', 'ONOFF');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `kits`
 --
 
@@ -4998,6 +5019,125 @@ INSERT INTO `kits` (`componente_codigo`, `produto_final_id`, `quantidade`) VALUE
 ('HTCAP0050', 1, 4.000000),
 ('HTCAP0071', 1, 8.000000),
 ('HTCAP0096', 1, 1.000000);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `logs`
+--
+
+CREATE TABLE IF NOT EXISTS `logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_id` int(11) NOT NULL,
+  `url` text COLLATE utf8_unicode_ci NOT NULL,
+  `get` text COLLATE utf8_unicode_ci NOT NULL,
+  `post` text COLLATE utf8_unicode_ci NOT NULL,
+  `horario` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=183 ;
+
+--
+-- Extraindo dados da tabela `logs`
+--
+
+INSERT INTO `logs` (`id`, `usuario_id`, `url`, `get`, `post`, `horario`) VALUES
+(87, 1, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 10:51:59'),
+(88, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:06'),
+(89, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:14'),
+(90, 1, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:15'),
+(91, 1, '/hstock/admin/usuarios.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 10:52:15'),
+(92, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:16'),
+(93, 1, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:17'),
+(94, 1, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:21'),
+(95, 1, '/hstock/admin/usuarios.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 10:52:21'),
+(96, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:21'),
+(97, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:24'),
+(98, 1, '/hstock/admin/usuarios.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 10:52:26'),
+(99, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:27'),
+(100, 1, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:27'),
+(101, 1, '/hstock/admin/usuarios.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 10:52:28'),
+(102, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:52:29'),
+(103, 1, '/hstock/admin/usuarios.php?action=edit&id=2', 'array (\n  ''action'' => ''edit'',\n  ''id'' => ''2'',\n)', 'array (\n)', '2010-06-16 10:52:30'),
+(104, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:53:29'),
+(105, 1, '/hstock/admin/usuarios.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 10:53:32'),
+(106, 1, '/hstock/admin/usuarios.php?action=create', 'array (\n  ''action'' => ''create'',\n)', 'array (\n  ''username'' => ''teste'',\n  ''password'' => ''teste'',\n  ''cpassword'' => ''teste'',\n  ''nome'' => ''teste'',\n)', '2010-06-16 10:53:39'),
+(107, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:53:39'),
+(108, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:54:27'),
+(109, 1, '/hstock/admin/usuarios.php?action=edit&id=6', 'array (\n  ''action'' => ''edit'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 10:54:31'),
+(110, 1, '/hstock/admin/usuarios.php?action=update&id=6', 'array (\n  ''action'' => ''update'',\n  ''id'' => ''6'',\n)', 'array (\n  ''username'' => ''teste'',\n  ''opassword'' => ''teste'',\n  ''password'' => ''test'',\n  ''cpassword'' => ''test'',\n  ''nome'' => ''teste'',\n)', '2010-06-16 10:54:41'),
+(111, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 10:54:41'),
+(112, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:01:09'),
+(113, 1, '/hstock/admin/usuarios.php?action=edit&id=6', 'array (\n  ''action'' => ''edit'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:01:49'),
+(114, 1, '/hstock/admin/usuarios.php?action=update&id=6', 'array (\n  ''action'' => ''update'',\n  ''id'' => ''6'',\n)', 'array (\n  ''username'' => ''teste'',\n  ''opassword'' => ''test'',\n  ''password'' => ''teste'',\n  ''cpassword'' => ''teste'',\n  ''nome'' => ''teste'',\n)', '2010-06-16 11:01:56'),
+(115, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:01:56'),
+(116, 1, '/hstock/admin/usuarios.php?action=edit&id=6', 'array (\n  ''action'' => ''edit'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:02:24'),
+(117, 1, '/hstock/admin/usuarios.php?action=update&id=6', 'array (\n  ''action'' => ''update'',\n  ''id'' => ''6'',\n)', 'array (\n  ''username'' => ''teste'',\n  ''opassword'' => ''t'',\n  ''password'' => ''t'',\n  ''cpassword'' => ''t'',\n  ''nome'' => ''teste'',\n)', '2010-06-16 11:02:30'),
+(118, 1, '/hstock/admin/usuarios.php?action=edit&id=6', 'array (\n  ''action'' => ''edit'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:02:37'),
+(119, 1, '/hstock/admin/usuarios.php?action=update&id=6', 'array (\n  ''action'' => ''update'',\n  ''id'' => ''6'',\n)', 'array (\n  ''username'' => ''teste'',\n  ''opassword'' => ''teste'',\n  ''password'' => ''tt'',\n  ''cpassword'' => ''t'',\n  ''nome'' => ''teste'',\n)', '2010-06-16 11:02:52'),
+(120, 1, '/hstock/admin/usuarios.php?action=edit&id=6', 'array (\n  ''action'' => ''edit'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:02:53'),
+(121, 1, '/hstock/admin/usuarios.php?action=update&id=6', 'array (\n  ''action'' => ''update'',\n  ''id'' => ''6'',\n)', 'array (\n  ''username'' => ''teste'',\n  ''opassword'' => ''teste'',\n  ''password'' => ''teste'',\n  ''cpassword'' => ''teste'',\n  ''nome'' => ''teste'',\n)', '2010-06-16 11:03:02'),
+(122, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:03:02'),
+(123, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:03:36'),
+(124, 1, '/hstock/admin/usuarios.php?action=edit&id=6', 'array (\n  ''action'' => ''edit'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:03:37'),
+(125, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:03:41'),
+(126, 1, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:03:44'),
+(127, 1, '/hstock/admin/configuracoes.php?action=edit&opcao=log', 'array (\n  ''action'' => ''edit'',\n  ''opcao'' => ''log'',\n)', 'array (\n)', '2010-06-16 11:03:45'),
+(128, 1, '/hstock/admin/configuracoes.php?action=update&opcao=log', 'array (\n  ''action'' => ''update'',\n  ''opcao'' => ''log'',\n)', 'array (\n  ''opcao'' => ''log'',\n  ''valor'' => ''desligado'',\n)', '2010-06-16 11:03:47'),
+(129, 1, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:04:00'),
+(130, 1, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:04:09'),
+(131, 1, '/hstock/admin/usuarios.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 11:04:10'),
+(132, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:04:11'),
+(133, 1, '/hstock/admin/usuarios.php?action=delete&id=6', 'array (\n  ''action'' => ''delete'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:04:13'),
+(134, 1, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:04:13'),
+(135, 2, '/hstock/pcp/produtos_finais.php', 'array (\n)', 'array (\n)', '2010-06-16 11:04:39'),
+(136, 2, '/hstock/pcp/produtos_finais.php', 'array (\n)', 'array (\n)', '2010-06-16 11:04:52'),
+(137, 2, '/hstock/estoque/home.php', 'array (\n)', 'array (\n)', '2010-06-16 11:05:42'),
+(138, 2, '/hstock/estoque/home.php', 'array (\n)', 'array (\n)', '2010-06-16 11:06:17'),
+(139, 2, '/hstock/estoque/home.php', 'array (\n)', 'array (\n)', '2010-06-16 11:06:22'),
+(140, 2, '/hstock/estoque/componentes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:20:43'),
+(141, 2, '/hstock/estoque/componentes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:20:54'),
+(142, 2, '/hstock/estoque/componentes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:21:14'),
+(143, 2, '/hstock/estoque/componentes.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 11:21:15'),
+(144, 2, '/hstock/estoque/componentes.php?action=pesquisar', 'array (\n  ''action'' => ''pesquisar'',\n)', 'array (\n)', '2010-06-16 11:21:16'),
+(145, 2, '/hstock/estoque/componentes.php?action=quantidade&p=0', 'array (\n  ''action'' => ''quantidade'',\n  ''p'' => ''0'',\n)', 'array (\n)', '2010-06-16 11:21:16'),
+(146, 2, '/hstock/estoque/componentes.php?action=quantidade&p=0', 'array (\n  ''action'' => ''quantidade'',\n  ''p'' => ''0'',\n)', 'array (\n)', '2010-06-16 11:21:17'),
+(147, 2, '/hstock/estoque/componentes.php?action=quantidade&p=0', 'array (\n  ''action'' => ''quantidade'',\n  ''p'' => ''0'',\n)', 'array (\n)', '2010-06-16 11:21:18'),
+(148, 2, '/hstock/estoque/componentes.php?action=pesquisar', 'array (\n  ''action'' => ''pesquisar'',\n)', 'array (\n)', '2010-06-16 11:21:20'),
+(149, 2, '/hstock/estoque/ops.php', 'array (\n)', 'array (\n)', '2010-06-16 11:21:21'),
+(150, 2, '/hstock/estoque/ops.php', 'array (\n)', 'array (\n)', '2010-06-16 11:21:33'),
+(151, 2, '/hstock/admin/login.php', 'array (\n)', 'array (\n  ''username'' => ''stefano'',\n  ''password'' => ''stefano'',\n  ''button'' => ''Enviar'',\n)', '2010-06-16 11:21:46'),
+(152, 2, '/hstock/admin/home.php', 'array (\n)', 'array (\n)', '2010-06-16 11:21:47'),
+(153, 2, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:21:48'),
+(154, 2, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:21:49'),
+(155, 2, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:24:33'),
+(156, 2, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:24:58'),
+(157, 2, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:36:27'),
+(158, 2, '/hstock/admin/usuarios.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 11:36:29'),
+(159, 2, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:36:29'),
+(160, 2, '/hstock/admin/usuarios.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 11:36:30'),
+(161, 2, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:36:30'),
+(162, 2, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:36:30'),
+(163, 2, '/hstock/admin/configuracoes.php', 'array (\n)', 'array (\n)', '2010-06-16 11:39:52'),
+(164, 2, '/hstock/admin/usuarios.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 11:39:54'),
+(165, 2, '/hstock/admin/usuarios.php', 'array (\n)', 'array (\n)', '2010-06-16 11:39:55'),
+(166, 2, '/hstock/estoque/ops.php', 'array (\n)', 'array (\n)', '2010-06-16 11:43:13'),
+(167, 2, '/hstock/estoque/ops.php?action=view&id=6', 'array (\n  ''action'' => ''view'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:43:18'),
+(168, 2, '/hstock/estoque/ops.php?action=view&id=6', 'array (\n  ''action'' => ''view'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:44:17'),
+(169, 2, '/hstock/estoque/ops.php?action=view&id=6', 'array (\n  ''action'' => ''view'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:44:51'),
+(170, 2, '/hstock/estoque/ops.php', 'array (\n)', 'array (\n)', '2010-06-16 11:44:56'),
+(171, 2, '/hstock/estoque/ops.php?action=view&id=6', 'array (\n  ''action'' => ''view'',\n  ''id'' => ''6'',\n)', 'array (\n)', '2010-06-16 11:45:02'),
+(172, 2, '/hstock/pcp/ops.php', 'array (\n)', 'array (\n)', '2010-06-16 11:45:15'),
+(173, 2, '/hstock/pcp/ops.php', 'array (\n)', 'array (\n)', '2010-06-16 11:45:19'),
+(174, 2, '/hstock/pcp/ops.php?action=view&id=5', 'array (\n  ''action'' => ''view'',\n  ''id'' => ''5'',\n)', 'array (\n)', '2010-06-16 11:45:22'),
+(175, 2, '/hstock/pcp/ops.php?action=view&id=5', 'array (\n  ''action'' => ''view'',\n  ''id'' => ''5'',\n)', 'array (\n)', '2010-06-16 11:46:01'),
+(176, 2, '/hstock/pcp/ops.php', 'array (\n)', 'array (\n)', '2010-06-16 11:46:28'),
+(177, 2, '/hstock/pcp/produtos_finais.php', 'array (\n)', 'array (\n)', '2010-06-16 11:48:36'),
+(178, 2, '/hstock/pcp/kits.php', 'array (\n)', 'array (\n)', '2010-06-16 11:48:37'),
+(179, 2, '/hstock/pcp/kits.php', 'array (\n)', 'array (\n)', '2010-06-16 11:48:37'),
+(180, 2, '/hstock/pcp/kits.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 11:48:38'),
+(181, 2, '/hstock/pcp/produtos_finais.php?action=add', 'array (\n  ''action'' => ''add'',\n)', 'array (\n)', '2010-06-16 11:48:39'),
+(182, 2, '/hstock/pcp/ops.php', 'array (\n)', 'array (\n)', '2010-06-16 11:48:40');
 
 -- --------------------------------------------------------
 
@@ -5103,7 +5243,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `nome` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Extraindo dados da tabela `usuarios`
@@ -5121,8 +5261,14 @@ INSERT INTO `usuarios` (`id`, `username`, `password`, `nome`) VALUES
 -- Restrições para a tabela `kits`
 --
 ALTER TABLE `kits`
-  ADD CONSTRAINT `kits_ibfk_2` FOREIGN KEY (`produto_final_id`) REFERENCES `produtos_finais` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kits_ibfk_1` FOREIGN KEY (`componente_codigo`) REFERENCES `componentes` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `kits_ibfk_1` FOREIGN KEY (`componente_codigo`) REFERENCES `componentes` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `kits_ibfk_2` FOREIGN KEY (`produto_final_id`) REFERENCES `produtos_finais` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrições para a tabela `logs`
+--
+ALTER TABLE `logs`
+  ADD CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Restrições para a tabela `ops`
@@ -5134,5 +5280,5 @@ ALTER TABLE `ops`
 -- Restrições para a tabela `permissoes`
 --
 ALTER TABLE `permissoes`
-  ADD CONSTRAINT `permissoes_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `permissoes_ibfk_1` FOREIGN KEY (`modulo_id`) REFERENCES `modulos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `permissoes_ibfk_1` FOREIGN KEY (`modulo_id`) REFERENCES `modulos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `permissoes_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
